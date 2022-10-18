@@ -43,8 +43,8 @@ The analysis simulates having a certain amount of storage available.
 - It assumes the storage is perfectly efficient (every 1 GWh stored can be released at any time later as 1 GWh).
 - It assumes the required demand is a constant 29.96 GW (the average output)
 - It simulates the system with the storage. 
-  - If excess power is generated it is stored (up to the capacity of the storage) 
-  - If insufficient power is available energy is drawn down from the storage to meet the demand. 
+  - If wind power is generated in excess of the demand that extra is stored (up to the capacity of the storage) 
+  - If insufficient wind power is available to meet the demand then energy is drawn down from the storage as needed. 
 - For a given amount of storage it tracks:
   - How much overbuild would be required to ensure supply always meets demand.  
     - This is found using [binary search](https://en.wikipedia.org/wiki/Binary_search_algorithm).
