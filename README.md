@@ -42,9 +42,15 @@ Meaning of the columns:
 The analysis simulates having a certain amount of storage available.
 - It assumes the storage is perfectly efficient (every 1 GWh stored can be released at any time later as 1 GWh).
 - It assumes the required demand is a constant 29.96 GW (the average output)
+- It simulates the system with the storage. 
+  - If excess power is generated it is stored (up to the capacity of the storage) 
+  - If insufficient power is available energy is drawn down from the storage to meet the demand. 
 - For a given amount of storage it tracks:
-  - How much overbuild would be required to ensure supply always meets demand. This is done by simulating the system with the storage. If excess power is generated it is stored (up to the capacity of the storage) and if insufficient power is available energy is drawn down from the storage to meet the demand. We then find the smallest level of overbuild that ensures demand is always met using [binary search](https://en.wikipedia.org/wiki/Binary_search_algorithm). 
-  - Or without any overbuild how much backup capacity would be required to ensure supply always meets demand
+  - How much overbuild would be required to ensure supply always meets demand.  
+    - This is found using We then find the smallest level of overbuild that ensures demand is always met using [binary search](https://en.wikipedia.org/wiki/Binary_search_algorithm).
+    - It assumes we can simulate overbuild by multiplying the actual historical values by a constant factor. This is not a perfect estimate (distribution matters), but serves as a good enough approximation for these purposes. 
+  - Or without any overbuild how much backup capacity would be required to ensure supply always meets demand. 
+    - This is found by noting what the largest shortfall seen is when trying to draw power from the storage (i.e. when the storage is empty).
   
 The results:
 ```
