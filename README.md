@@ -1,6 +1,8 @@
 # Wind power analysis
 
-This analyses the [Ninja v1.1 wind power data](https://www.renewables.ninja/downloads).
+This is a best case analysis for trying to produce reliable power with 100% wind, using the (widely accepted) [Ninja v1.1 wind power data](https://www.renewables.ninja/downloads). The dataset takes the turbines that are installed today and predicts what power they would have produced in the past based on historical wind readings.
+- The first part of the analysis is an analysis of the moving average of total European wind power production. It shows there is considerable variation in the amount of wind power even when aggregated at the continent level.
+- The second is an analysis of how much storage would be required to produce reliable power using wind.
 
 ## How to run
 1. Install rust using [rustup](https://rustup.rs/)
