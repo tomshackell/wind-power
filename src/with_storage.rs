@@ -18,6 +18,9 @@ impl Storage {
         }
     }
 
+    /// Adds `delta` extra GWh to the storage, which can be negative to draw it down. Returns
+    /// `true` if `delta` was positive or there was enough in storage to provide the delta and
+    /// `false` if `delta` was negative and there was not enough in storage to meet it.   
     fn add(&mut self, delta: f64, date: &str) -> bool {
         let new_current = (self.current + delta).min(self.capacity);
         self.current = new_current.max(0.0);
@@ -28,7 +31,7 @@ impl Storage {
             self.max_shortfall = shortfall;
             self.max_shortfall_date = Some(String::from(date));
         }
-        shortfall <= 0.0 // true if there was no shortfall, or false if delta could be met
+        shortfall <= 0.0 // true if there was no shortfall, or false if delta could not be met
     }
 }
 
