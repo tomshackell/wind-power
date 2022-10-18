@@ -80,7 +80,8 @@ Meaning of the columns:
 - `Backup required (GW)` - without any overbuild how much backup capacity is required to ensure the demand is always met.
 
 Analysis:
-- With no storage you must either overbuild by a factor of 11.04, or provide 27.25 GW of backup.
+- With no storage you must either overbuild by a factor of 11.04, or provide 27.25 GW of backup. 
+  - Note that 11.04 agrees with the moving average analysis that the 1h moving average has a minimum of 9.06% of the average value (1.0/0.0906 = 11.04). 
 - With 10 GWh of storage (NOTE: [all the storage batteries in the world in 2018 amounted to 8 GWh](https://www.worldenergy.org/assets/downloads/ESM_Final_Report_05-Nov-2019.pdf)) you must overbuild by a factor of 9.01 or alternatively provide 27.25 GW of backup.
 - With 500 GWh of storage (NOTE: this is [more storage than all the pumped storage in Europe](https://www.dnv.com/news/estorage-study-shows-huge-potential-capacity-of-exploitable-pumped-hydro-energy-storage-sites-in-europe-63675)) you would need to overbuild by a factor of 2.88.
 - With 10,000 GWh of storage (NOTE: this is [more storage than all the pumped storage in the world](https://www.hydropower.org/factsheets/pumped-storage)) you would need to overbuild by a factor of 1.40.
