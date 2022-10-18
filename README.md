@@ -1,6 +1,6 @@
 # Wind power analysis
 
-This analyses the [Ninja v1.1 wind power data](https://www.renewables.ninja/static/downloads/ninja_europe_wind_v1.1.zip).
+This analyses the [Ninja v1.1 wind power data](https://www.renewables.ninja/downloads).
 
 ## How to run
 1. Install rust using [rustup](https://rustup.rs/)
