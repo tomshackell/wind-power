@@ -55,6 +55,8 @@ The analysis simulates having a certain amount of storage available.
     - It assumes we can simulate overbuild by multiplying the actual installed capacity by a constant factor. This is not a perfect estimate (distribution matters), but serves as a good enough approximation for these purposes. Given there are now wind turbines all across Europe it is reasonable to estimate that if you built twice as many wind turbines you would get roughly twice as much power as you do today. 
   - Or without any overbuild how much backup capacity would be required to ensure supply always meets demand. 
     - This is found by noting what the largest shortfall seen is when trying to draw power from the storage.
+  - Or with a 2x overbuild how much backup capacity would be required
+    - NOTE: this makes the same assumption about overbuild as described above.
   
 The results:
 ```
