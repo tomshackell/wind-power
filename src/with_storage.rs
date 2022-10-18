@@ -71,17 +71,18 @@ fn find_required_backup(storage_gwh: f64, wind_data: &WindData) -> f64 {
 /// Find the amount of overbuild required to ensure there is never a shortage, given a certain
 /// amount of `storage_gwh` and `wind_data`
 fn find_required_overbuild(storage_gwh: f64, wind_data: &WindData) -> f64 {
-    let mut low = 0.0;
-    let mut high = 100.0;
-    while (high - low) > 0.01 {
-        let mid = (high + low) / 2.0;
+    // this works using binary search to find the right level of overbuild (to within 0.001)
+    let mut lower_limit = 0.0;
+    let mut upper_limit = 1000.0; // we assume overbuild by 1000 is always enough
+    while (upper_limit - lower_limit) > 0.001 {
+        let mid = (upper_limit + lower_limit) / 2.0;
         if always_meets_demand(storage_gwh, wind_data, mid) {
-            low = mid;
+            upper_limit = mid; // then we know mid is sufficient, move upper limit down
         } else {
-            high = mid;
+            lower_limit = mid; // then we know mid is insufficient, move lower limit up
         }
     }
-    (high + low) / 2.0
+    (upper_limit + lower_limit) / 2.0
 }
 
 /// Returns whether the given configuration of `storage_gwh`, `wind_data` and `overbuild` will
@@ -91,8 +92,8 @@ fn always_meets_demand(storage_gwh: f64, wind_data: &WindData, overbuild: f64) -
     for (date, total) in wind_data {
         let extra = total * overbuild - DEMAND_LOAD;
         if storage.add(extra, date) {
-            return true;
+            return false;
         }
     }
-    false
+    true
 }

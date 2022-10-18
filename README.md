@@ -52,16 +52,17 @@ Storage (GWh)   Overbuild factor required   Backup required (GW)
 
 0               11.04                       27.25
 10              9.01                        27.25
-20              7.97                        27.25
+20              7.98                        27.25
 50              6.14                        27.25
 100             4.74                        27.25
-200             3.43                        27.25
+200             3.42                        27.25
 500             2.88                        27.25
 1000            2.40                        27.25
 2000            1.93                        27.25
-5000            1.63                        27.25
-10000           1.39                        27.25
-100000          1.00                        23.32
+5000            1.62                        27.25
+10000           1.40                        27.25
+100000          1.01                        23.32
+
 ```
 Meaning of the columns:
 - `Storage (GWh)` - the amount of storage available in GWh
