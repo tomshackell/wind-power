@@ -76,7 +76,7 @@ Analysis:
 - With 10,000 GWh of storage (NOTE: this is [more storage than all the pumped storage in the world](https://www.hydropower.org/factsheets/pumped-storage)) you would need to overbuild by a factor of 1.40.
 - With 150,000 GWh of storage no overbuild or backup capacity is required to provide the reliable 29.96 GW.
 
-This is to produce 29.96GW of reliable power. For comparison Europe's total electricity need is roughly 10x this figure (around 300GW) and it's total energy need is roughly 40 times this figure. The amount of storage required to produce 40x the amount of power would be around 40x as much. 
+This is to produce 29.96GW of reliable power. For comparison Europe's total electricity need is roughly 10x this figure (around 300GW) and it's total energy need is roughly 40 times this figure. The amount of storage required to produce 40x the amount of power would be 40x as much according to this simulation. 
 
 ## Conclusions 
 

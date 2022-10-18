@@ -2,9 +2,13 @@ use crate::WindData;
 use tabular::{row, Table};
 
 struct Storage {
+    /// Total capacity of the storage (in GWh)
     capacity: f64,
+    /// The current amount of energy stored in the storage (in GWh)
     current: f64,
+    /// The maximum shortfall that was seen when trying to draw from the storage (in GWh)
     max_shortfall: f64,
+    /// The date at which that shortfall occurred
     max_shortfall_date: Option<String>,
 }
 
