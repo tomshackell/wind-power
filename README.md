@@ -1,8 +1,10 @@
 # Wind power analysis
 
-This is a best case analysis for trying to produce reliable power with 100% wind, using the (widely accepted) [Ninja v1.1 wind power data](https://www.renewables.ninja/downloads). The dataset takes the turbines that are installed today and predicts what power they would have produced in the past based on historical wind readings.
+This is a best case analysis for trying to produce reliable power with 100% wind, using the [Ninja v1.1 wind power data](https://www.renewables.ninja/downloads). The dataset takes the turbines that are installed today and predicts what power they would have produced in the past based on historical wind readings.
 - The first part of the analysis is an analysis of the moving average of total European wind power production. It shows there is considerable variation in the amount of wind power even when aggregated at the continent level.
 - The second is an analysis of how much storage would be required to produce reliable power using wind.
+
+The goal is to study the feasibility of powering Europe with 100% wind and provide estimates for how much storage, overbuild or backup capacity would be required to do so in a way that provides reliable electricity.
 
 ## How to run
 1. Install rust using [rustup](https://rustup.rs/)
@@ -94,6 +96,4 @@ In conclusion:
 - You can trade off somewhat between these three options: but any of them is going to be expensive.
 - The cheapest option (by far) is to have backup capacity available on standby: this is what Germany has done in practice. With current available technology this backup must either by hydropower, which is limited in scale, or more commonly it is met by fossil fuels (as Germany is doing).
 - This analysis has just summed the power across the countries and assumed perfect interconnection is available for free at any capacity that's required: in reality it's not and adding that interconnection would add significantly to the expense.
-- As previously stated: VRE can be cheap as a modest part of a flexible grid, but trying to get it to produce reliable electricity is extremely hard and the current LCOE figures would need to be multiplied by several fold to start getting anywhere near this.
-
-
+- VRE can be cheap as a modest part of a flexible grid, but trying to get it to produce reliable electricity is extremely hard. Current LCOE figures cannot be taken as a reasonable guide to what would be required to produce reliable electricity using intermittent sources.
