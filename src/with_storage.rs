@@ -21,14 +21,14 @@ impl Storage {
     fn add(&mut self, delta: f64, date: &str) -> bool {
         let new_current = (self.current + delta).min(self.capacity);
         self.current = new_current.max(0.0);
+
+        // calculate the amount of shortfall (if any)
         let shortfall = self.current - new_current;
         if shortfall > self.max_shortfall {
             self.max_shortfall = shortfall;
             self.max_shortfall_date = Some(String::from(date));
-            true
-        } else {
-            false
         }
+        shortfall <= 0.0 // true if there was no shortfall, or false if delta could be met
     }
 }
 
@@ -61,9 +61,9 @@ pub fn storage_main(wind_data: &WindData) {
 /// Find the amount of backup that is required to ensure demand is always met.
 fn find_required_backup(storage_gwh: f64, wind_data: &WindData) -> f64 {
     let mut storage = Storage::new(storage_gwh);
-    for (date, total) in wind_data {
-        let extra = total - DEMAND_LOAD;
-        storage.add(extra, date);
+    for (date, wind_gw) in wind_data {
+        let extra_gw = wind_gw - DEMAND_LOAD;
+        storage.add(extra_gw, date);
     }
     storage.max_shortfall
 }
@@ -89,9 +89,9 @@ fn find_required_overbuild(storage_gwh: f64, wind_data: &WindData) -> f64 {
 /// always managed to meet the required amount of demand.
 fn always_meets_demand(storage_gwh: f64, wind_data: &WindData, overbuild: f64) -> bool {
     let mut storage = Storage::new(storage_gwh);
-    for (date, total) in wind_data {
-        let extra = total * overbuild - DEMAND_LOAD;
-        if storage.add(extra, date) {
+    for (date, wind_gw) in wind_data {
+        let extra_gw = wind_gw * overbuild - DEMAND_LOAD;
+        if !storage.add(extra_gw, date) {
             return false;
         }
     }
