@@ -37,7 +37,7 @@ const DEMAND_LOAD: f64 = 29.96;
 
 pub fn storage_main(wind_data: &WindData) {
     let storage_amounts = [
-        0.0, 10.0, 20.0, 50.0, 100.0, 200.0, 500.0, 1000.0, 2000.0, 5000.0, 10000.0, 100_000.0,
+        0.0, 10.0, 20.0, 50.0, 100.0, 200.0, 500.0, 1000.0, 2000.0, 5000.0, 10000.0, 150_000.0,
     ];
     let mut table = Table::new("{:<}   {:<}   {:<}");
     table.add_row(row!(
