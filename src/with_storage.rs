@@ -81,7 +81,7 @@ fn find_required_backup(storage_gwh: f64, wind_data: &WindData, overbuild: f64) 
 /// Find the amount of overbuild required to ensure there is never a shortage, given a certain
 /// amount of `storage_gwh` and `wind_data`
 fn find_required_overbuild(storage_gwh: f64, wind_data: &WindData) -> f64 {
-    // this works using binary search to find the right level of overbuild (to within 0.001)
+    // this works using the bisection method to find the right level of overbuild (to within 0.001)
     let mut lower_limit = 0.0;
     let mut upper_limit = 1000.0; // we assume overbuild by 1000 is always enough
     while (upper_limit - lower_limit) > 0.001 {
