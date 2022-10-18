@@ -13,7 +13,6 @@ The nature of the analysis is:
 - calculate the total power (GWs) generated across all of the countries in the model using the capacity ratios in `ninja_wind_europe_v1.1_current_national.csv` and the listed installed capacity per country in the associated metadata and taking the sum across each row.
 - then track the [moving average](https://en.wikipedia.org/wiki/Moving_average) of that total GW output value for different window sizes
 - then record the minimum/maximum of that moving average across the entire data set for each window size.
-- I'll happily provide a link over PM to the github for the source code that generated these results (it's not complicated).
 
 Here are the results:
 ```
