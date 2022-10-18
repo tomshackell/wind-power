@@ -58,33 +58,33 @@ The analysis simulates having a certain amount of storage available.
   
 The results:
 ```
-Storage (GWh)   Overbuild factor required   Backup required (GW)
+Storage (GWh)   Overbuild factor required   Backup required (GW)   Backup required 2x overbuild (GW)
 
-0               11.04                       27.25
-10              9.01                        27.25
-20              7.98                        27.25
-50              6.14                        27.25
-100             4.74                        27.25
-200             3.43                        27.25
-500             2.88                        27.25
-1000            2.40                        27.25
-2000            1.92                        27.25
-5000            1.62                        27.25
-10000           1.40                        27.25
-150000          0.99                        0.00
-
+0               11.04                       27.25                  24.53
+10              9.01                        27.25                  24.53
+20              7.98                        27.25                  24.53
+50              6.14                        27.25                  24.53
+100             4.74                        27.25                  24.53
+200             3.43                        27.25                  24.53
+500             2.88                        27.25                  24.53
+1000            2.40                        27.25                  20.79
+2000            1.92                        27.25                  0.00
+5000            1.62                        27.25                  0.00
+10000           1.40                        27.25                  0.00
+150000          0.99                        0.00                   0.00
 ```
 Meaning of the columns:
 - `Storage (GWh)` - the amount of storage available in GWh
 - `Overbuild factor required`- given this amount of storage, and the wind data, how much overbuild is required to ensure that the demand (constant 29.96GW) is always met without any kind of backup capacity. 
 - `Backup required (GW)` - without any overbuild how much backup capacity is required to ensure the demand is always met.
+- `Backup required 2x overbuild (GW)` - with a 2x overbuild how much backup capacity is required to ensure the demand is always met.
 
 Analysis:
-- With no storage you must either overbuild by a factor of 11.04, or provide 27.25 GW of backup. 
+- With no storage you must either overbuild by a factor of 11.04, or provide 27.25 GW of backup. If you overbuild by a factor of 2 then 24.53 GW of backup capacity would need to be available. 
   - Note that 11.04 agrees with the moving average analysis that the 1h moving average has a minimum of 9.06% of the average value (1.0/0.0906 = 11.04). 
 - With 10 GWh of storage (NOTE: [all the storage batteries in the world in 2018 amounted to 8 GWh](https://www.worldenergy.org/assets/downloads/ESM_Final_Report_05-Nov-2019.pdf)) you must overbuild by a factor of 9.01 or alternatively provide 27.25 GW of backup.
 - With 500 GWh of storage (NOTE: this is [more storage than all the pumped storage in Europe](https://www.dnv.com/news/estorage-study-shows-huge-potential-capacity-of-exploitable-pumped-hydro-energy-storage-sites-in-europe-63675)) you would need to overbuild by a factor of 2.88.
-- With 10,000 GWh of storage (NOTE: this is [more storage than all the pumped storage in the world](https://www.hydropower.org/factsheets/pumped-storage)) you would need to overbuild by a factor of 1.40.
+- With 10,000 GWh of storage (NOTE: this is [more storage than all the pumped storage in the world](https://www.hydropower.org/factsheets/pumped-storage)) you would need to overbuild by a factor of 1.40. Note that if you overbuild by a factor of 2 then with this amount of storage then no additional backup capacity is required in this scenario. 
 - With 150,000 GWh of storage no overbuild or backup capacity is required to provide the reliable 29.96 GW.
 
 This is to produce 29.96GW of reliable power. For comparison Europe's total electricity need is roughly 10x this figure (around 300GW) and it's total energy need is roughly 40 times this figure. The amount of storage required to produce 40x the amount of power would be 40x as much according to this simulation. 

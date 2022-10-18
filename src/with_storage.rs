@@ -46,30 +46,33 @@ pub fn storage_main(wind_data: &WindData) {
     let storage_amounts = [
         0.0, 10.0, 20.0, 50.0, 100.0, 200.0, 500.0, 1000.0, 2000.0, 5000.0, 10000.0, 150_000.0,
     ];
-    let mut table = Table::new("{:<}   {:<}   {:<}");
+    let mut table = Table::new("{:<}   {:<}   {:<}   {:<}");
     table.add_row(row!(
         "Storage (GWh)",
         "Overbuild factor required",
-        "Backup required (GW)"
+        "Backup required (GW)",
+        "Backup required 2x overbuild (GW)",
     ));
     table.add_heading("");
     for storage in storage_amounts {
         let required_overbuild = find_required_overbuild(storage, &wind_data);
-        let required_backup = find_required_backup(storage, &wind_data);
+        let required_backup = find_required_backup(storage, &wind_data, 1.0);
+        let required_backup2 = find_required_backup(storage, &wind_data, 2.0);
         table.add_row(row!(
             storage,
             format!("{:.2}", required_overbuild),
-            format!("{:.2}", required_backup)
+            format!("{:.2}", required_backup),
+            format!("{:.2}", required_backup2),
         ));
     }
     println!("{}", table);
 }
 
 /// Find the amount of backup that is required to ensure demand is always met.
-fn find_required_backup(storage_gwh: f64, wind_data: &WindData) -> f64 {
+fn find_required_backup(storage_gwh: f64, wind_data: &WindData, overbuild: f64) -> f64 {
     let mut storage = Storage::new(storage_gwh);
     for (date, wind_gw) in wind_data {
-        let extra_gw = wind_gw - DEMAND_LOAD;
+        let extra_gw = wind_gw * overbuild - DEMAND_LOAD;
         storage.add(extra_gw, date);
     }
     storage.max_shortfall
