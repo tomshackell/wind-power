@@ -12,7 +12,7 @@ impl Storage {
     fn new(capacity_gwh: f64) -> Self {
         Self {
             capacity: capacity_gwh,
-            current: capacity_gwh,
+            current: capacity_gwh, // storage starts full: simplifies the analysis
             max_shortfall: 0.0,
             max_shortfall_date: None,
         }
@@ -84,8 +84,8 @@ fn find_required_overbuild(storage_gwh: f64, wind_data: &WindData) -> f64 {
     (high + low) / 2.0
 }
 
-/// Returns whether the given configuration of `storage_gwh`, `wind_data` and `overbuild` will ever
-/// meet the required amount of demand.
+/// Returns whether the given configuration of `storage_gwh`, `wind_data` and `overbuild` will
+/// always managed to meet the required amount of demand.
 fn always_meets_demand(storage_gwh: f64, wind_data: &WindData, overbuild: f64) -> bool {
     let mut storage = Storage::new(storage_gwh);
     for (date, total) in wind_data {
