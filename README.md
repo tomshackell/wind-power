@@ -33,10 +33,10 @@ Average output: 29.96 GW
 ```
 Meaning of the columns:
 - `Window size` the size of window used to calculate the moving average
-- `Minimum (GW)` the minimum moving average of the amount of power generated across all 30 countries in the data set in total.
-- `Maximum (GW)` the maximum moving average of the amount of power generated across all 30 countries in the data set in total.
-- `Min as % of Average` what the minimum is as a percentage of the average output. The average output for all 30 countries is measured at 29.96 GW, this tallies exactly with the installed capacity (119.4 GW) and the expected capacity factor (25.1%) from the metadata, (119.4 * 0.251 = 29.96)
-- `Date of Minimum` when that minimum occurred in the data set.
+- `Min (GW)` the minimum moving average of the amount of power generated across all 30 countries in the data set in total.
+- `Max (GW)` the maximum moving average of the amount of power generated across all 30 countries in the data set in total.
+- `Min as % Avg` what the minimum is as a percentage of the average output. The average output for all 30 countries is measured at 29.96 GW, this tallies exactly with the installed capacity (119.4 GW) and the expected capacity factor (25.1%) from the metadata, (119.4 * 0.251 = 29.96)
+- `Date of Min` when that minimum occurred in the data set.
 
 So for a 1 hour moving average, which corresponds to having no storage:
 - Summing all of the power generated across all 30 countries the total generation was at a minimum at 2009-07-01 06:00:00 with a total generation of just 2.71 GW. This is just 9.06% of the average output (29.96 GW).
