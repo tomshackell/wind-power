@@ -47,7 +47,7 @@ The analysis simulates having a certain amount of storage available.
   - If insufficient power is available energy is drawn down from the storage to meet the demand. 
 - For a given amount of storage it tracks:
   - How much overbuild would be required to ensure supply always meets demand.  
-    - This is found using We then find the smallest level of overbuild that ensures demand is always met using [binary search](https://en.wikipedia.org/wiki/Binary_search_algorithm).
+    - This is found using [binary search](https://en.wikipedia.org/wiki/Binary_search_algorithm).
     - It assumes we can simulate overbuild by multiplying the actual historical values by a constant factor. This is not a perfect estimate (distribution matters), but serves as a good enough approximation for these purposes. 
   - Or without any overbuild how much backup capacity would be required to ensure supply always meets demand. 
     - This is found by noting what the largest shortfall seen is when trying to draw power from the storage (i.e. when the storage is empty).
