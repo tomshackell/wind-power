@@ -44,13 +44,13 @@ The analysis simulates having a certain amount of storage available.
 - It assumes the required demand is a constant 29.96 GW (the average output)
 - It simulates the system with the storage. 
   - If wind power is generated in excess of the demand that extra is stored (up to the capacity of the storage) 
-  - If insufficient wind power is available to meet the demand then energy is drawn down from the storage as needed. 
+  - If insufficient wind power is available to meet the demand then energy is drawn down from the storage as needed. The amount of energy stored will never go negative but instead there can be a shortfall in matching the demand if not enough energy is stored.  
 - For a given amount of storage it tracks:
   - How much overbuild would be required to ensure supply always meets demand.  
     - This is found using [binary search](https://en.wikipedia.org/wiki/Binary_search_algorithm).
     - It assumes we can simulate overbuild by multiplying the actual historical values by a constant factor. This is not a perfect estimate (distribution matters), but serves as a good enough approximation for these purposes: if you built twice as many wind turbines across Europe you would get roughly twice as much power as you do today. 
   - Or without any overbuild how much backup capacity would be required to ensure supply always meets demand. 
-    - This is found by noting what the largest shortfall seen is when trying to draw power from the storage (i.e. when the storage is empty).
+    - This is found by noting what the largest shortfall seen is when trying to draw power from the storage.
   
 The results:
 ```
