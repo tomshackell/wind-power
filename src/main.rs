@@ -1,4 +1,4 @@
-//mod with_storage;
+mod with_storage;
 
 use circular_queue::CircularQueue;
 use std::io;
@@ -28,9 +28,9 @@ fn main() -> io::Result<()> {
     .collect::<Vec<_>>();
 
     // push all the data into the windows to calculate the moving averages for each window size
-    for (date, total) in wind_data {
+    for (date, total) in &wind_data {
         for window in &mut windows {
-            window.push(total, &date);
+            window.push(*total, date);
         }
     }
 
@@ -65,6 +65,9 @@ fn main() -> io::Result<()> {
     }
     println!("{}", table);
     println!("Average output: {:.2} GW", average);
+    println!();
+
+    with_storage::storage_main(&wind_data);
     Ok(())
 }
 
