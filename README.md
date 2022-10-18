@@ -72,10 +72,12 @@ Analysis:
 - With no storage you must either overbuild by a factor of 11.04, or provide 27.27 GW of backup.
 - With 10 GWh of storage (NOTE: [all the storage batteries in the world in 2018 amounted to 8 GWh](https://www.worldenergy.org/assets/downloads/ESM_Final_Report_05-Nov-2019.pdf)) you must overbuild by a factor of 9.01 or alternatively provide 27.25 GW of backup.
 - With 500 GWh of storage (NOTE: this is [more storage than all the pumped storage in Europe](https://www.dnv.com/news/estorage-study-shows-huge-potential-capacity-of-exploitable-pumped-hydro-energy-storage-sites-in-europe-63675)) you would need to overbuild by a factor of 2.88.
-- With 10000 GWh of storage (NOTE: this is [more storage than all the pumped storage in the world](https://www.hydropower.org/factsheets/pumped-storage)) you would need to overbuild by a factor of 1.39.
-- With 100000 GWh of storage (almost) no overbuild is required
+- With 10,000 GWh of storage (NOTE: this is [more storage than all the pumped storage in the world](https://www.hydropower.org/factsheets/pumped-storage)) you would need to overbuild by a factor of 1.39.
+- With 100,000 GWh of storage (almost) no overbuild is required
 
-This is to produce 29.96GW of reliable power. For comparison Europe's total electricity need is roughly 10x this figure (around 300GW) and it's total energy need is roughly 40 times this figure. 
+This is to produce 29.96GW of reliable power. For comparison Europe's total electricity need is roughly 10x this figure (around 300GW) and it's total energy need is roughly 40 times this figure. The amount of storage required to produce 40x the amount of power would be 40x as much. 
+
+## Conclusions 
 
 In conclusion:
 - Periods of highly depressed wind output across all of Europe are common place, there are many examples in the data set. This is true both at short term frames (1 hour) and long time frames (25 days).
