@@ -43,7 +43,7 @@ The analysis simulates having a certain amount of storage available.
 - It assumes the storage is perfectly efficient (every 1 GWh stored can be released at any time later as 1 GWh).
 - It assumes the required demand is a constant 29.96 GW (the average output)
 - For a given amount of storage it tracks:
-  - How much overbuild would be required to ensure supply always meets demand
+  - How much overbuild would be required to ensure supply always meets demand. This is done by simulating the system with the storage. If excess power is generated it is stored (up to the capacity of the storage) and if insufficient power is available energy is drawn down from the storage to meet the demand. We then find the smallest level of overbuild that ensures demand is always met using [binary search](https://en.wikipedia.org/wiki/Binary_search_algorithm). 
   - Or without any overbuild how much backup capacity would be required to ensure supply always meets demand
   
 The results:
