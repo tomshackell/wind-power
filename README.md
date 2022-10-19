@@ -2,7 +2,7 @@
 
 This is a best case analysis for trying to produce reliable power with 100% wind, using the [Ninja v1.1 wind power data](https://www.renewables.ninja/downloads). The dataset takes the turbines that are installed today and predicts what power they would have produced in the past based on historical wind readings.
 - The first part of the analysis is an analysis of the moving average of total European wind power production. It shows there is considerable variation in the amount of wind power even when aggregated at the continent level.
-- The second is an analysis of how much storage would be required to produce reliable power using wind.
+- The second is an analysis of how much storage would be required to produce reliable power using wind. This is also done at the aggregate level, which assumes perfect interconnection of power throughout Europe.
 
 The goal is to study the feasibility of powering Europe with 100% wind and provide estimates for how much storage, overbuild or backup capacity would be required to do so in a way that provides reliable electricity.
 
