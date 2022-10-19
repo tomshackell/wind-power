@@ -48,15 +48,16 @@ The analysis simulates having a certain amount of storage available.
 - It assumes the required demand is a constant 29.96 GW (the average output)
 - It simulates the system with the storage. 
   - If wind power is generated in excess of the demand that extra is stored (up to the capacity of the storage) 
-  - If insufficient wind power is available to meet the demand then energy is drawn down from the storage as needed. The amount of energy stored will never go negative but instead there can be a shortfall in matching the demand if not enough energy is stored.  
-- For a given amount of storage it tracks:
-  - How much overbuild would be required to ensure supply always meets demand.  
-    - This is found using the [bisection method](https://en.wikipedia.org/wiki/Bisection_method).
-    - It assumes we can simulate overbuild by multiplying the actual installed capacity by a constant factor. This is not a perfect estimate (distribution matters), but serves as a good enough approximation for these purposes. Given there are now wind turbines all across Europe it is reasonable to estimate that if you built twice as many wind turbines you would get roughly twice as much power as you do today. 
-  - Or without any overbuild how much backup capacity would be required to ensure supply always meets demand. 
+  - If insufficient wind power is available to meet the demand then energy is drawn down from the storage as needed. The amount of energy stored will never go negative but instead there can be a shortfall in matching the demand if not enough energy is stored.
+- Some of these scenarios simulate overbuild: building additional extra capacity.
+  - An overbuild factor of 2 means that (for example) instead of meeting 25 GW of demand by building 100 GW at 25% capacity factor you would instead build 200 GW of turbines to meet that 25 GW demand. This improves the reliability of the power generated at the cost of building extra turbines.
+  - The storage analysis assumes we can simulate overbuild by multiplying the actual installed capacity by a constant factor. This is not a perfect estimate (distribution matters), but serves as a good enough approximation for these purposes. Given there are now wind turbines all across Europe it is reasonable to estimate that if you built twice as many wind turbines you would get roughly twice as much power as you do today, with roughly the same hourly variation. 
+- For a given amount of storage the analysis calculates:
+  - The minimal amount of overbuild that would ensure that supply always meets demand.  
+    - This is found using the [bisection method](https://en.wikipedia.org/wiki/Bisection_method) to zero in on the correct amount of overbuild.     
+  - Without any overbuild: how much backup capacity would be required to ensure supply always meets demand. 
     - This is found by noting what the largest shortfall seen is when trying to draw power from the storage.
-  - Or with a 2x overbuild how much backup capacity would be required
-    - NOTE: this makes the same assumption about overbuild as described above.
+  - With a 2x overbuild: how much backup capacity would be required
   
 The results:
 ```
