@@ -44,14 +44,15 @@ Meaning of the columns:
 ## Storage analysis
 
 The analysis simulates having a certain amount of storage available.
+- It assumes the required demand is a constant 1200 GW, the rough primary power use of Europe. So this analysis lets us model how much storage would be needed to meet all of Europe's energy needs.
+  - This is done by taking the current amount of installed capacity in the dataset, 29.96 GW average, and multiplying the power output by 40.05 to produce 1200 GW average output.
+  - This is not a perfect estimate (distribution matters), but serves as a good enough approximation for these purposes. Given there are now wind turbines all across Europe it is reasonable to estimate that if you built twice as many wind turbines you would get roughly twice as much power as you do today, with roughly the same profile of hourly output variation.
 - It assumes the storage is perfectly efficient (every 1 GWh stored can be released at any time later as 1 GWh).
-- It assumes the required demand is a constant 29.96 GW (the average output)
 - It simulates the system with the storage. 
   - If wind power is generated in excess of the demand that extra is stored (up to the capacity of the storage) 
   - If insufficient wind power is available to meet the demand then energy is drawn down from the storage as needed. The amount of energy stored will never go negative but instead there can be a shortfall in matching the demand if not enough energy is stored.
 - Some of these scenarios simulate overbuild: building additional extra capacity.
   - An overbuild factor of 2 means that (for example) instead of meeting 25 GW of demand by building 100 GW at 25% capacity factor you would instead build 200 GW of turbines to meet that 25 GW demand. This improves the reliability of the power generated at the cost of building extra turbines.
-  - The storage analysis assumes we can simulate overbuild by multiplying the actual installed capacity by a constant factor. This is not a perfect estimate (distribution matters), but serves as a good enough approximation for these purposes. Given there are now wind turbines all across Europe it is reasonable to estimate that if you built twice as many wind turbines you would get roughly twice as much power as you do today, with roughly the same profile of hourly output variation. 
 - For a given amount of storage the analysis calculates:
   - The minimal amount of overbuild that would ensure that supply always meets demand.  
     - This is found using the [bisection method](https://en.wikipedia.org/wiki/Bisection_method) to zero in on the correct amount of overbuild.     
@@ -63,18 +64,19 @@ The results:
 ```
 Storage (GWh)   Overbuild factor required   Backup required (GW)   Backup required 2x overbuild (GW)
 
-0               11.04                       27.25                  24.53
-10              9.01                        27.25                  24.53
-20              7.98                        27.25                  24.53
-50              6.14                        27.25                  24.53
-100             4.74                        27.25                  24.53
-200             3.43                        27.25                  24.53
-500             2.88                        27.25                  24.53
-1000            2.40                        27.25                  20.79
-2000            1.92                        27.25                  0.00
-5000            1.62                        27.25                  0.00
-10000           1.40                        27.25                  0.00
-150000          0.99                        0.00                   0.00
+0               11.04                       1091.31                982.63
+100             10.34                       1091.31                982.63
+200             9.89                        1091.31                982.63
+500             8.74                        1091.31                982.63
+1000            7.59                        1091.31                982.63
+2000            6.14                        1091.31                982.63
+5000            4.29                        1091.31                982.63
+10000           3.26                        1091.31                982.63
+20000           2.88                        1091.31                982.63
+50000           2.22                        1091.31                832.58
+100000          1.80                        1091.31                0.00
+
+Storage required for no overbuild (GWh): 4761097.8
 ```
 Meaning of the columns:
 - `Storage (GWh)` - the amount of storage available in GWh
@@ -83,14 +85,12 @@ Meaning of the columns:
 - `Backup required 2x overbuild (GW)` - with a 2x overbuild how much backup capacity is required to ensure the demand is always met.
 
 Analysis:
-- With no storage you must either overbuild by a factor of 11.04, or provide 27.25 GW of backup. If you overbuild by a factor of 2 then 24.53 GW of backup capacity would need to be available. 
+- With no storage you must either overbuild by a factor of 11.04, or provide 1091.31 GW of backup. If you overbuild by a factor of 2 then 982.63 GW of backup capacity would need to be available. 
   - Note that 11.04 agrees with the moving average analysis that the 1h moving average has a minimum of 9.06% of the average value (1.0/0.0906 = 11.04). 
-- With 10 GWh of storage (NOTE: [all the storage batteries in the world in 2018 amounted to 8 GWh](https://www.worldenergy.org/assets/downloads/ESM_Final_Report_05-Nov-2019.pdf)) you must overbuild by a factor of 9.01 or alternatively provide 27.25 GW of backup.
-- With 500 GWh of storage (NOTE: this is [more storage than all the pumped storage in Europe](https://www.dnv.com/news/estorage-study-shows-huge-potential-capacity-of-exploitable-pumped-hydro-energy-storage-sites-in-europe-63675)) you would need to overbuild by a factor of 2.88.
-- With 10,000 GWh of storage (NOTE: this is [more storage than all the pumped storage in the world](https://www.hydropower.org/factsheets/pumped-storage)) you would need to overbuild by a factor of 1.40. 
-- With 150,000 GWh of storage no overbuild or backup capacity is required to provide the reliable 29.96 GW.
-
-This is to produce 29.96GW of reliable power. For comparison Europe's total electricity need is roughly 10x this figure (around 300GW) and it's total energy need is roughly 40 times this figure. The amount of storage required to produce 40x the amount of power would be 40x as much according to this simulation. 
+- With 100 GWh of storage (NOTE: [all the storage batteries in the world in 2018 amounted to 8 GWh](https://www.worldenergy.org/assets/downloads/ESM_Final_Report_05-Nov-2019.pdf)) you must overbuild by a factor of 10.34 or alternatively provide 1091.31 GW of backup.
+- With 500 GWh of storage (NOTE: this is [more storage than all the pumped storage in Europe](https://www.dnv.com/news/estorage-study-shows-huge-potential-capacity-of-exploitable-pumped-hydro-energy-storage-sites-in-europe-63675)) you would need to overbuild by a factor of 8.74.
+- With 10,000 GWh of storage (NOTE: this is [more storage than all the pumped storage in the world](https://www.hydropower.org/factsheets/pumped-storage)) you would need to overbuild by a factor of 3.26. 
+- With 4,761,097.8 GWh of storage no overbuild or backup capacity is required to provide the reliable 1200 GW.
 
 ## Conclusions 
 
