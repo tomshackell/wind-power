@@ -3,6 +3,7 @@
 This is a best case analysis for trying to produce reliable power with 100% wind, using the [Ninja v1.1 wind power data](https://www.renewables.ninja/downloads). The dataset takes the turbines that are installed today and predicts what power they would have produced in the past based on historical wind readings.
 - The first part of the analysis is an analysis of the moving average of total European wind power production. It shows there is considerable variation in the amount of wind power even when aggregated at the continent level.
 - The second is an analysis of how much storage would be required to produce reliable power using wind. This is also done at the aggregate level, which assumes perfect interconnection of power throughout Europe.
+- The third is a cost analysis based on using natural gas backup to wind power. It seeks to find, for a particular natural gas price, what the lowest cost natural gas to wind power mix is.
 
 The goal is to study the feasibility of powering Europe with 100% wind and provide estimates for how much storage, overbuild or backup capacity would be required to do so in a way that provides reliable electricity.
 
@@ -101,16 +102,15 @@ The final analysis looks to estimate the cost of adding wind power as a way to r
 - We use the wind data to work out how much of that demand can be met by wind power.
   - Once again we will assume there is a perfect interconnection between all the countries in Europe by simply aggregating the wind values from all of them.
 - Increasing the amount of wind capacity installed lets us use less natural gas. Natural gas has a price in $/MWh, this is varied over the model.
-- However, we must build more wind turbines which costs money. 
-  - We are using the figure of $1,661 per KW of turbine, which we get [from ProEst](https://proest.com/construction/cost-estimates/power-plants/).
-  - We use a turbine lifetime of 25 years, which is considered standard, and calculate as a cost per year.
+  - However, it requires that we must build more wind turbines which costs money. 
+    - We are using the figure of $1,661 per KW of turbine, which we get [from ProEst](https://proest.com/construction/cost-estimates/power-plants/).
+    - We use a turbine lifetime of 25 years, which is considered standard, and calculate as a cost per year.
 - We must also have enough natural gas generating capacity to ensure we always meet our 300 GW demand, even when wind production is low.
   - The amount of backup natural gas capacity required is affected by how many wind turbines we build and is calculated using the wind data.
   - We use a price of $812 per KW of natural gas capacity, again [from ProEst](https://proest.com/construction/cost-estimates/power-plants/).
   - Again we consider natural gas plants to have a lifetime of 25 years, which is also standard.
 - Adding more wind turbines costs more in turbines, but less in natural gas, meaning there is a lowest cost optimal mix. We find this optimal lowest cost mix by simulating the system and zeroing in on the lowest possible cost.
 - For a given gas price we therefore calculate what the appropriate amount of installed wind capacity would be to ensure lowest cost whilst always meeting our 300 GW demand.
-
 ```
 Gas price ($/MWh)   Min cost wind cap. (GW)   Total cost ($b/yr)   Gas used (GW)   Gas cap. req. (GW)   Gas cap. factor (%)   Wind pwr used (GW)   Wind pwr percent (%)
 5                   0.00                      22.89                300.00          300.00               100.00                0.00                 0.00
