@@ -92,6 +92,69 @@ Analysis:
 - With 10,000 GWh of storage (NOTE: this is [more storage than all the pumped storage in the world](https://www.hydropower.org/factsheets/pumped-storage)) you would need to overbuild by a factor of 3.26. 
 - With 4,761,097.8 GWh of storage no overbuild or backup capacity is required to provide the reliable 1200 GW.
 
+
+## Cost
+
+The final analysis looks to estimate the cost of adding wind power as a way to reduce gas consumption. This is done by:
+- We assume that we must always meet 300 GW of demand, this is the average electricity use of Europe.
+- Any shortfalls in supplying that 300 GW will be met by burning natural gas.
+- We use the wind data to work out how much of that demand can be met by wind power.
+  - Once again we will assume there is a perfect interconnection between all the countries in Europe by simply aggregating the wind values from all of them.
+- Increasing the amount of wind capacity installed lets us use less natural gas. Natural gas has a price in $/MWh, this is varied over the model.
+- However, we must build more wind turbines which costs money. 
+  - We are using the figure of $1,661 per KW of turbine, which we get [from ProEst](https://proest.com/construction/cost-estimates/power-plants/).
+  - We use a turbine lifetime of 25 years, which is considered standard, and calculate as a cost per year.
+- We must also have enough natural gas generating capacity to ensure we always meet our 300 GW demand, even when wind production is low.
+  - The amount of backup natural gas capacity required is affected by how many wind turbines we build and is calculated using the wind data.
+  - We use a price of $812 per KW of natural gas capacity, again [from ProEst](https://proest.com/construction/cost-estimates/power-plants/).
+  - Again we consider natural gas plants to have a lifetime of 25 years, which is also standard.
+- Adding more wind turbines costs more in turbines, but less in natural gas, meaning there is a lowest cost optimal mix. We find this optimal lowest cost mix by simulating the system and zeroing in on the lowest possible cost.
+- For a given gas price we therefore calculate what the appropriate amount of installed wind capacity would be to ensure lowest cost whilst always meeting our 300 GW demand.
+
+```
+Gas price ($/MWh)   Min cost wind cap. (GW)   Total cost ($b/yr)   Gas used (GW)   Gas cap. req. (GW)   Gas cap. factor (%)   Wind pwr used (GW)   Wind pwr percent (%)
+5                   0.00                      22.89                300.00          300.00               100.00                0.00                 0.00
+10                  0.00                      36.04                300.00          300.00               100.00                0.00                 0.00
+15                  0.00                      49.19                300.00          300.00               100.00                0.00                 0.00
+20                  0.00                      62.34                300.00          300.00               100.00                0.00                 0.00
+25                  0.00                      75.49                300.00          300.00               100.00                0.00                 0.00
+30                  452.32                    88.52                186.54          289.72               64.38                 113.46               37.82
+35                  678.56                    95.21                133.25          284.58               46.82                 166.75               55.58
+40                  790.87                    100.52               110.69          282.03               39.25                 189.31               63.10
+45                  881.19                    105.00               94.71           279.98               33.83                 205.29               68.43
+50                  955.18                    108.88               83.01           278.29               29.83                 216.99               72.33
+60                  1071.97                   115.40               66.98           275.64               24.30                 233.02               77.67
+70                  1163.38                   120.78               56.38           273.56               20.61                 243.62               81.21
+80                  1239.60                   125.37               48.74           271.83               17.93                 251.26               83.75
+90                  1305.25                   129.38               42.94           270.34               15.88                 257.06               85.69
+100                 1362.97                   132.93               38.38           269.03               14.26                 261.62               87.21
+110                 1414.32                   136.13               34.70           267.86               12.96                 265.30               88.43
+120                 1460.37                   139.04               31.70           266.81               11.88                 268.30               89.43
+130                 1502.09                   141.70               29.19           265.87               10.98                 270.81               90.27
+140                 1540.99                   144.16               27.03           264.98               10.20                 272.97               90.99
+150                 1576.15                   146.45               25.21           264.18               9.54                  274.79               91.60
+160                 1609.43                   148.59               23.60           263.43               8.96                  276.40               92.13
+170                 1640.20                   150.59               22.20           262.73               8.45                  277.80               92.60
+180                 1669.73                   152.48               20.94           262.06               7.99                  279.06               93.02
+190                 1696.66                   154.27               19.85           261.45               7.59                  280.15               93.38
+200                 1722.32                   155.97               18.86           260.86               7.23                  281.14               93.71
+```
+Meaning of the columns:
+- Gas price ($/MWh) - is the price of gas that we are simulating for. Historically natural gas has been [about $10-$30 per MWh in the US and Europe](https://skranz.github.io/images/gas_price_by_region-1.svg), but recently it's spiked much higher.
+- Min cost wind cap. (GW) - the amount of installed wind capacity that gives the lowest total cost of generating our 300 GW of demand.
+- Total cost ($b/yr) - the cost of generating the 300 GW of power, as billions of dollars per year.
+- Gas used (GW) - the total amount of gas generation that is used to provide the 300 GW.
+- Gas cap. req. (GW) - the total amount of gas generation capacity that is required to ensure a reliable 300 GW supply even during periods of low wind.
+- Gas cap. factor (%) - the average capacity factor of the installed gas turbines.
+- Wind pwr used (GW) - the amount of wind power that is actually used (and not curtailed) to generate a reliable 300 GW.
+- Wind pwr percent (%) - what percent does wind power make up in our final generation mix.
+
+Analysis:
+- Below a gas price of $30/MWh pure natural gas is the cheapest option. Historically prices of natural gas have usually been below this level, so wind power would only be economically viable with subsidy.
+- Current carbon pricing doesn't change this significantly: for example the [highest carbon price in the world](https://www.statista.com/statistics/483590/prices-of-implemented-carbon-pricing-instruments-worldwide-by-select-country/) is currently imposed by Uruguay, at $137/tonne, which corresponds to an extra $2.53 per MWh.
+- As gas prices increase adding wind power becomes increasingly more profitable.
+- This is, however, strongly subject to diminishing returns and increasing wind beyond about 80% of total generation gets harder and harder and requires an increasingly higher gas price.
+
 ## Conclusions 
 
 In conclusion:

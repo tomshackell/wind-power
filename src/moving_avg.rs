@@ -20,7 +20,7 @@ pub fn moving_avg_main(wind_data: &WindData) {
     .collect::<Vec<_>>();
 
     // push all the data into the windows to calculate the moving averages for each window size
-    for (date, total) in wind_data {
+    for (date, total) in &wind_data.output_gw {
         for window in &mut windows {
             window.push(*total, date);
         }

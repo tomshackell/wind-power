@@ -1,6 +1,10 @@
 use crate::WindData;
 use tabular::{row, Table};
 
+/// The total power demand in GW that we need to meet, here we use a figure that's (roughly)
+/// equivalent to meeting all of Europe's primary energy needs
+const DEMAND_GW: f64 = 1200.0;
+
 struct Storage {
     /// Total capacity of the storage (in GWh)
     capacity: f64,
@@ -39,14 +43,13 @@ impl Storage {
     }
 }
 
-pub fn storage_main(wind_data: &WindData, demand: f64) {
-    let average_output =
-        wind_data.iter().map(|(_, output)| output).sum::<f64>() / (wind_data.len() as f64);
+pub fn storage_main(wind_data: &WindData) {
+    let average_output = wind_data.average_output_gw;
     let wind = WindPower {
         data: wind_data,
         /// We scale the amount of wind power so the average output matches the demand
-        scaling_factor: demand / average_output,
-        demand,
+        scaling_factor: DEMAND_GW / average_output,
+        demand: DEMAND_GW,
     };
     let storage_amounts = [
         0.0, 100.0, 200.0, 500.0, 1000.0, 2000.0, 5000.0, 10_000.0, 20_000.0, 50_000.0, 100_000.0,
@@ -88,6 +91,7 @@ struct WindPower<'a> {
 impl WindPower<'_> {
     fn outputs(&self) -> impl Iterator<Item = (&str, f64)> {
         self.data
+            .output_gw
             .iter()
             .map(|(date, output)| (date.as_str(), *output * self.scaling_factor))
     }
