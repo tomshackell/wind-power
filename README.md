@@ -104,11 +104,11 @@ The final analysis looks to estimate the cost of adding wind power as a way to r
 - Increasing the amount of wind capacity installed lets us use less natural gas. Natural gas has a price in $/MWh, this is varied over the model.
   - However, it requires that we must build more wind turbines which costs money. 
     - We are using the figure of $1,661 per KW of turbine, which we get [from ProEst](https://proest.com/construction/cost-estimates/power-plants/).
-    - We use a turbine lifetime of 25 years, which is considered standard, and calculate as a cost per year.
+    - We use a turbine lifetime of 25 years, which is considered standard, and calculate as per year cost of $66.44 per KW per year.
 - We must also have enough natural gas generating capacity to ensure we always meet our 300 GW demand, even when wind production is low.
   - The amount of backup natural gas capacity required is affected by how many wind turbines we build and is calculated using the wind data.
   - We use a price of $812 per KW of natural gas capacity, again [from ProEst](https://proest.com/construction/cost-estimates/power-plants/).
-  - Again we consider natural gas plants to have a lifetime of 25 years, which is also standard.
+  - Again we consider natural gas plants to have a lifetime of 25 years, which is also standard, giving us a per-year cost of $32.48 per KW per year.
 - Adding more wind turbines costs more in turbines, but less in natural gas, meaning there is a lowest cost optimal mix. We find this optimal lowest cost mix by simulating the system and zeroing in on the lowest possible cost.
 - For a given gas price we therefore calculate what the appropriate amount of installed wind capacity would be to ensure lowest cost whilst always meeting our 300 GW demand.
 ```
